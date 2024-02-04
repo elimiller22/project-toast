@@ -18,8 +18,8 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast({ children, variant, visible, setVisible }) {
-  if (!visible) return null;
+function Toast({ children, variant, removeToast }) {
+  // if (!visible) return null;
   const Icon = ICONS_BY_VARIANT[variant] || Info
   const className = styles[variant] || styles.notice
   return (
@@ -31,7 +31,7 @@ function Toast({ children, variant, visible, setVisible }) {
         {children}
       </p>
       <button className={styles.closeButton}>
-        <X onClick={() => { setVisible(false); }} size={24} />
+        <X onClick={() => { removeToast(); }} size={24} />
         <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>
     </div>
