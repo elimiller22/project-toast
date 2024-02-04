@@ -17,7 +17,9 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
-      <Toast message={message} variant={variant} visible={showToast} setVisible={setShowToast} />
+      <Toast variant={variant} visible={showToast} setVisible={setShowToast}>
+        {message}
+      </Toast>
 
       <div className={styles.controlsWrapper}>
         <div className={styles.row}>
