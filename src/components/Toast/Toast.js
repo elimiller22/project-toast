@@ -19,7 +19,6 @@ const ICONS_BY_VARIANT = {
 };
 
 function Toast({ children, variant, removeToast }) {
-  // if (!visible) return null;
   const Icon = ICONS_BY_VARIANT[variant] || Info
   const className = styles[variant] || styles.notice
   return (

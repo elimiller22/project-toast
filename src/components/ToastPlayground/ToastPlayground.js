@@ -5,31 +5,14 @@ import ToastShelf from "../ToastShelf";
 
 import styles from "./ToastPlayground.module.css";
 
+import { ToastContext } from "../ToastProvider";
+
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
 function ToastPlayground() {
   const [message, setMessage] = React.useState("");
   const [variant, setVariant] = React.useState(VARIANT_OPTIONS[0]);
-  const [toasts, setToasts] = React.useState([]);
-
-  function removeToast(id) {
-    const newToasts = toasts.filter(item => item.id !== id);
-    setToasts(newToasts);
-  }
-
-  function createToast() {
-    const newToasts = [
-      ...toasts,
-      {
-        id: crypto.randomUUID(),
-        variant,
-        message
-      }
-    ];
-    setToasts(newToasts)
-    setMessage("");
-    setVariant(VARIANT_OPTIONS[0]);
-  }
+  const { createToast } = React.useContext(ToastContext);
 
   return (
     <div className={styles.wrapper}>
@@ -37,12 +20,14 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
-      <ToastShelf toasts={toasts} removeToast={removeToast} />
+      <ToastShelf />
       <form
         className={styles.controlsWrapper}
         onSubmit={(event) => {
           event.preventDefault();
-          createToast();
+          createToast(variant, message);
+          setMessage("");
+          setVariant(VARIANT_OPTIONS[0]);
         }}
       >
         <div className={styles.row}>
